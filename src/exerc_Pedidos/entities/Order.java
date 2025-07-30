@@ -1,41 +1,88 @@
 package exerc_Pedidos.entities;
 
 import aulas.Data;
+import enumeracoes.entities.enums.OrderStatus;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private Data moment;
-    private OrderItem status;
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+    private Date moment;
+    private OrderStatus status;
 
     private List<OrderItem> items = new ArrayList<>();
+    private Client client;
 
     public Order() {
     }
 
-    public Order(Data moment, OrderItem status) {
+    public Order(Date moment, OrderStatus status, Client client) {
         this.moment = moment;
         this.status = status;
+        this.client = client;
     }
 
-    public Data getMoment() {
+    public Date getMoment() {
         return moment;
     }
 
-    public void setMoment(Data moment) {
+    public void setMoment(Date moment) {
         this.moment = moment;
     }
 
-    public OrderItem getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(OrderItem status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
-    public void addItem(OrderItem item) {
+    public Client getClient() {
+        return client;
+    }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void addItem(OrderItem item) {
+        items.add(item);
+    }
+
+    public void removeItems(OrderItem item) {
+        items.remove(item);
+    }
+
+    public Double total() {
+        double total = 0;
+        for (OrderItem v : items) {
+            total += v.subTotal();
+        }
+        return total;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order Summary:" + "\n");
+        sb.append("Order moment: " + sdf.format(moment)+ "\n");
+        sb.append("Order Status: "+ status+ "\n");
+        sb.append("Client: " + client + "\n");
+        sb.append("Order items:"+ "\n");
+        for (OrderItem c : items) {
+            sb.append(c+ "\n");
+        }
+        sb.append("Total price: $"+total()+ "\n");
+
+        return sb.toString();
     }
 }
