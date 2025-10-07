@@ -21,8 +21,8 @@ public class Program {
         System.out.print("Modelo do carro: ");
         String carModel = entrada.nextLine();
 
-        System.out.print("Retirada (dd/MM/yyyy): ");
-        LocalDateTime start = LocalDateTime.parse(entrada.nextLine(), fmt);
+        System.out.println("Retirada (dd/MM/yyyy): ");
+        LocalDateTime start = LocalDateTime.parse(entrada.next(), fmt);
 
         System.out.print("Retorno (dd/MM/yyyy): ");
         LocalDateTime finish = LocalDateTime.parse(entrada.nextLine(), fmt);

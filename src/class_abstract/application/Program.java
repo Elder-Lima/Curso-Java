@@ -29,7 +29,7 @@ public class Program {
         System.out.println(sum);
 
         for (Account acc : list) {
-            acc.deposit(10.0);
+            acc.withdraw(10.0);
         }
 
         for (Account acc : list) {
